@@ -30,7 +30,7 @@
         }
         p { 
             color: #555; 
-            font-size: 14px;
+            font-size: 14px; 
             line-height: 1.5;
         }
         .btn { 
@@ -54,7 +54,7 @@
             margin-top: 15px; 
             color: #1976d2; 
             font-size: 14px; 
-            font-weight: 500;
+            font-weight: 500; 
         }
         .spinner {
             border: 3px solid #f3f3f3;
@@ -90,31 +90,24 @@
 
     <script>
         // --- CONFIGURAÇÃO ---
-        // Certifique-se que o nome do arquivo no GitHub seja EXATAMENTE 'app.apk'
-        const apkName = 'app.apk'; 
+        // LINK DIRETO DO GOOGLE DRIVE (JÁ CONFIGURADO)
+        const apkName = 'https://drive.google.com/uc?export=download&id=1eqGiasWvAhGCyUyD_JbHlw-i_ib32Ey-'; 
 
         function iniciarInstalacao() {
             // 1. Esconde o botão e mostra o loader
             document.getElementById('installBtn').style.display = 'none';
             document.getElementById('loader').style.display = 'block';
 
-            // 2. Tenta forçar o download direto (Android Chrome)
-            // Usa o esquema 'intent' para tentar abrir o instalador nativo
-            const intentUrl = 'intent://' + apkName + '#Intent;scheme=content;package=com.android.packageinstaller;end';
+            // 2. Tenta forçar o download direto
+            // Como é um link externo (Drive), o intent não funciona bem. 
+            // Vamos forçar o download direto.
             
-            // Tenta abrir o intent
-            window.location.href = intentUrl;
-
-            // 3. Fallback: Se o intent não funcionar (ex: iOS ou navegador específico), 
-            // força o download do arquivo após 1.5 segundos
-            setTimeout(function() {
-                const link = document.createElement('a');
-                link.href = apkName; // Caminho relativo para o arquivo no GitHub
-                link.download = apkName;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }, 1500);
+            const link = document.createElement('a');
+            link.href = apkName;
+            link.download = 'app.apk'; // Nome que o arquivo vai ter no celular
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
     </script>
 
